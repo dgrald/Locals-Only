@@ -3,7 +3,7 @@ import com.typesafe.sbt.SbtScalariform._
 
 import scalariform.formatter.preferences._
 
-name := "play-silhouette-angular-seed"
+name := "locals-only"
 
 version := "4.0.0"
 
@@ -23,6 +23,9 @@ libraryDependencies ++= Seq(
   "com.iheart" %% "ficus" % "1.2.6",
   "com.adrianhurt" %% "play-bootstrap" % "1.0-P25-B3",
   "com.mohiva" %% "play-silhouette-testkit" % "4.0.0" % "test",
+  "org.reactivemongo" %% "play2-reactivemongo" % "0.12.0",
+  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
+  "org.mockito" % "mockito-core" % "2.2.9" % Test,
   cache,
   filters
 )
@@ -35,7 +38,6 @@ scalacOptions ++= Seq(
   "-deprecation", // Emit warning and location for usages of deprecated APIs.
   "-feature", // Emit warning and location for usages of features that should be imported explicitly.
   "-unchecked", // Enable additional warnings where generated code depends on assumptions.
-  "-Xfatal-warnings", // Fail the compilation if there are any warnings.
   "-Xlint", // Enable recommended additional warnings.
   "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver.
   "-Ywarn-dead-code", // Warn when dead code is identified.
