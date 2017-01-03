@@ -9,10 +9,13 @@
     "angular-resource": "1.5.5",
     "angular-messages": "1.5.5",
     "angular-animate": "1.5.5",
+    "angular-mocks": "1.5.5",
     "angular-strap": "2.3.8",
     "angular-route": "1.5.5",
     "angular-cookies": "1.5.5",
     "bootstrap-sass-official": "3.3.6",
-    "ui-router": "0.2.18"
+    "ui-router": "0.2.18",
+    "satellizer": "^0.15.5",
+    "angular-sanitize": "^1.6.1"
   }
 }

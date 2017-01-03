@@ -48,6 +48,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $authPro
     }})
     .state('signUp', { url: '/signUp', templateUrl: '/views/signUp.html' })
     .state('signIn', { url: '/signIn', templateUrl: '/views/signIn.html' })
+    .state('map', { url: '/map', templateUrl: '/views/map.html', controller: 'MapCtrl' })
     .state('signOut', { url: '/signOut', template: null,  controller: 'SignOutCtrl' });
 
   $httpProvider.interceptors.push(function($q, $injector) {

@@ -39,7 +39,7 @@ module.exports = function (grunt) {
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['test/spec/**/*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
@@ -373,13 +373,13 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    // Test settings
-    //karma: {
-    //  unit: {
-    //    configFile: 'karma.conf.js',
-    //    singleRun: true
-    //  }
-    //}
+    //Test settings
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
+    }
   });
 
 
@@ -407,8 +407,8 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'connect:test'
-    //'karma'
+    'connect:test',
+    'karma'
   ]);
 
   grunt.registerTask('build', [
@@ -434,4 +434,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.loadNpmTasks('grunt-karma');
 };

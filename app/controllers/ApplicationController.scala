@@ -53,6 +53,7 @@ class ApplicationController @Inject() (
       case "signUp" => Ok(views.html.signUp())
       case "signIn" => Ok(views.html.signIn(socialProviderRegistry))
       case "navigation" => Ok(views.html.navigation())
+      case "map" => Ok(views.html.map())
       case _ => NotFound
     }
   }
