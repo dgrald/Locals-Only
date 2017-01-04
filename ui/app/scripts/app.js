@@ -9,7 +9,8 @@ var app = angular.module('uiApp', [
   'ngCookies',
   'ui.router',
   'mgcrea.ngStrap',
-  'satellizer'
+  'satellizer',
+  'ui-leaflet'
 ]);
 
 /**

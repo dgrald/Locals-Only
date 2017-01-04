@@ -10,9 +10,15 @@ describe('MapCtrl', function() {
     ctrl = $controller('MapCtrl', { $scope: scope });
   }));
 
-  describe('$scope.message', function() {
+  describe('$scope.alta', function() {
     it('should be set correctly', function() {
-      expect(scope.message).toEqual("Hello, it's me!");
+      var expected = {
+        lat: 40.5888,
+        lng: -111.6380,
+        zoom: 14
+      };
+
+      expect(scope.alta).toEqual(expected);
     });
   });
 });
