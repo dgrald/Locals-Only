@@ -1,12 +1,11 @@
 describe("StashService", function () {
-  var userService, httpBackend, someRandom;
+  var stashService, httpBackend;
 
   beforeEach(module("uiApp"));
 
-  beforeEach(inject(function (_StashService_, $httpBackend, _SomeRandom_) {
-    userService = _StashService_;
+  beforeEach(inject(function (_StashService_, $httpBackend) {
+    stashService = _StashService_;
     httpBackend = $httpBackend;
-    someRandom = _SomeRandom_;
   }));
 
   it("should load stashes", function () {
@@ -14,7 +13,7 @@ describe("StashService", function () {
     httpBackend.whenGET('/stash').respond(200, stashes);
 
     var actualStashes;
-    userService.getStashes().then(function(returnFromPromise) {
+    stashService.getStashes().then(function(returnFromPromise) {
       actualStashes = returnFromPromise.data;
     });
     httpBackend.flush();

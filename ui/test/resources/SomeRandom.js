@@ -1,8 +1,6 @@
 'use strict';
 
-/*global app: false */
-app.factory('SomeRandom', function() {
-  return {
+var someRandom = {
     string: function() {
       return Math.random().toString(36).substr(2, 5);
     },
@@ -13,5 +11,4 @@ app.factory('SomeRandom', function() {
       }
       return toReturn;
     }
-  };
-});
+};

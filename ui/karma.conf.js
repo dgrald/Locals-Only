@@ -24,6 +24,7 @@ module.exports = function(config) {
       'app/bower_components/leaflet/dist/leaflet-src.js',
       'app/bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'app/bower_components/ui-leaflet/dist/ui-leaflet.js',
+      'app/bower_components/ng-lodash/build/ng-lodash.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/resources/**/*.js',

@@ -1,7 +1,7 @@
 'use strict';
 
 /*global app: false */
-app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', function($rootScope, $scope, $alert, UserFactory) {
+app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', 'StashService', 'MarkerService', 'lodash', function($rootScope, $scope, $alert, UserFactory, StashService, MarkerService, _) {
 
     $scope.alta = {
       lat: 40.5888,
@@ -22,4 +22,22 @@ app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', func
 
     $scope.tiles = mapbox_outdoors;
 
+    $scope.refreshStashes = function() {
+        StashService.getStashes().then(function(response){
+            var geojsonData = _.map(response.data, function(next) {
+              return next.location;
+            });
+
+            $scope.geojson = {
+              data: geojsonData
+            };
+
+            var markers = _.map(response.data, function(next){
+              return MarkerService.getMarkers(next);
+            });
+            $scope.markers = markers;
+        });
+    };
+
+    $scope.refreshStashes();
 }]);

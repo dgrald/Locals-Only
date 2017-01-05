@@ -10,7 +10,8 @@ var app = angular.module('uiApp', [
   'ui.router',
   'mgcrea.ngStrap',
   'satellizer',
-  'ui-leaflet'
+  'ui-leaflet',
+  'ngLodash'
 ]);
 
 /**
