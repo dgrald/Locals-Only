@@ -1,9 +1,9 @@
 'use strict';
 
 /*global app: false */
-app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', 'StashService', 'MarkerService', 'lodash', function($rootScope, $scope, $alert, UserFactory, StashService, MarkerService, _) {
+app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', 'StashService', 'MarkerService', 'lodash', 'leafletBoundsHelpers', '$uibModal', function($rootScope, $scope, $alert, UserFactory, StashService, MarkerService, _, leafletBoundsHelpers, $uibModal) {
 
-    $scope.alta = {
+    $scope.center = {
       lat: 40.5888,
       lng: -111.6380,
       zoom: 14
@@ -32,7 +32,7 @@ app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', 'Sta
               data: geojsonData
             };
 
-            var markers = _.map(response.data, function(next){
+            var markers = _.flatMap(response.data, function(next){
               return MarkerService.getMarkers(next);
             });
             $scope.markers = markers;
@@ -40,4 +40,23 @@ app.controller('MapCtrl', ['$rootScope', '$scope', '$alert', 'UserFactory', 'Sta
     };
 
     $scope.refreshStashes();
+
+    $scope.addStash = function() {
+      var modalInstance = $uibModal.open({
+        template: '<div class="modal-header">Add Stash</div>' +
+          '<div class="modal-body"><leaflet width="100%" height="480px" lf-center="center" tiles="tiles"></leaflet></div>' +
+          '<div class="modal-footer"><button class="btn btn-primary" ng-click="addStash()">Add Stash</button><button class="btn btn-default" ng-click="cancel()">Cancel</button></div>',
+        controller: 'AddStashModalCtrl',
+        scope: angular.merge($rootScope, {
+          center: $scope.center,
+          tiles: $scope.tiles
+        })
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+          console.log(selectedItem);
+      }, function () {
+
+      });
+    };
 }]);

@@ -24,7 +24,8 @@ class StashControllerSpec extends PlaySpec with MockitoSugar with OneAppPerSuite
   def getStash(location: Location, jsValue: JsValue): Stash = {
     val name = (jsValue \ "name").get.validate[String].get
     val id = (jsValue \ "_id").get.validate[String].get
-    Stash(id, name, location)
+    val userID = (jsValue \ "userID").get.validate[String].get
+    Stash(id, userID, name, location)
   }
 
   def getPointStash(jsValue: JsValue): Stash = {

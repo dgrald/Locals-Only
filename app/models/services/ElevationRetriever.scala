@@ -36,7 +36,6 @@ class ElevationRetriever(ws: WSClient, baseUrl: String) {
     ws.url(baseUrl + "/json").withQueryString(locationQueryString, keyQueryString).get().map { response =>
       val resultsJson = response.json
       val results = resultsJson \ "results"
-      println(results)
       val elevationResults = results.validate[List[ElevationResult]].get
 
       def mapPointsToElevations(points: Seq[(Double, Double)]): Seq[ElevationPoint] = {

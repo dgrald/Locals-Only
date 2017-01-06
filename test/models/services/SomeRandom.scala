@@ -31,7 +31,7 @@ object SomeRandom {
   }
 
   def stash(location: Location): Stash = {
-    Stash(uuidString(), string(), location)
+    Stash(uuidString(), uuidString(), string(), location)
   }
 
   def lineLocation(): LineLocation = {

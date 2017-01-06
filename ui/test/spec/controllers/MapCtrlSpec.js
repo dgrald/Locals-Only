@@ -23,9 +23,9 @@ describe('MapCtrl', function() {
     stash2 = {location: stash2Location};
     allStashes = [stash1, stash2];
 
-     stash1Markers = someRandom.object();
-     stash2Markers = someRandom.object();
-     allStashMarkers = [stash1Markers, stash2Markers];
+     stash1Markers = [someRandom.object(), someRandom.object()];
+     stash2Markers = [someRandom.object()];
+     allStashMarkers = stash1Markers.concat(stash2Markers);
 
      spyOn(MarkerService, 'getMarkers').and.callFake(function(input){
        if(_.isEqual(input, stash1)) {
@@ -42,25 +42,26 @@ describe('MapCtrl', function() {
       createController();
     });
 
-    it('$scope.alta should be set correctly', function() {
+    it('$scope.center should be set correctly', function() {
       var expected = {
         lat: 40.5888,
         lng: -111.6380,
         zoom: 14
       };
 
-      expect(scope.alta).toEqual(expected);
+      expect(scope.center).toEqual(expected);
     });
   });
 
   describe('loading of the data', function(){
-    beforeEach(function(){
-      spyOn(stashService, 'getStashes').and.returnValue(deferred.promise);
-      deferred.resolve({data: allStashes});
-      createController();
-    });
+      beforeEach(function(){
+        spyOn(stashService, 'getStashes').and.returnValue(deferred.promise);
+        deferred.resolve({data: allStashes});
+        createController();
+      });
 
     describe('refreshStashes', function(){
+
       it('should load the stashes', function() {
         var expected = {data: [stash1Location, stash2Location]};
 

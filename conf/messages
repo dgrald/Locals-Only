@@ -1,5 +1,9 @@
 app.name = Locals Only
 
+cancel.label = Cancel
+
+addStash.label = Add Stash
+
 map = Map
 map.proceed = Proceed to map
 

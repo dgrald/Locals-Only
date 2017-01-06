@@ -6,25 +6,27 @@ app.factory('MarkerService', ['lodash', function(_) {
     getMarkers: function(stash) {
       var geometry = stash.location.geometry;
 
-      var getLatLng = function() {
+      var getLatLngs = function() {
          if(geometry.type === "Point") {
-            var lng = geometry.coordinates[0];
-            var lat = geometry.coordinates[1];
-            return [lng, lat];
-         } else {
+            return [geometry.coordinates];
+         } else if(geometry.type == "Polygon") {
             var latLng = geometry.coordinates[0];
-            return latLng;
+            return [latLng];
+         } else {
+            var firstLatLng = geometry.coordinates[0];
+            var lastLatLng = geometry.coordinates[geometry.coordinates.length - 1]
+            return [firstLatLng, lastLatLng];
          }
       };
 
-      var latLng = getLatLng();
-      var lng = latLng[0];
-      var lat = latLng[1];
-      return {
-        message: stash.name,
-        lat: lat,
-        lng: lng
-      };
+      var latLngs = getLatLngs();
+      return _.flatMap(latLngs, function(next){
+        return {
+          message: stash.name,
+          lat: next[1],
+          lng: next[0]
+        };
+      });
     }
   };
 }]);

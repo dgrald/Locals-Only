@@ -15,7 +15,7 @@ case class LineLocation(points: List[(Double, Double)]) extends Location
 
 case class PolygonLocation(points: List[(Double, Double)]) extends Location
 
-case class Stash(_id: String, name: String, location: Location)
+case class Stash(_id: String, userID: String, name: String, location: Location)
 
 object Location {
 
@@ -24,9 +24,9 @@ object Location {
     def convertCoordinatesToPairs(coordinates: List[List[Double]]): Option[List[(Double, Double)]] = {
       val allCoordinatesValid = coordinates.forall(c => c.length == 2)
       if (allCoordinatesValid) {
-        Some(coordinates.map(c => c match {
+        Some(coordinates.map {
           case Seq(first, second) => (first, second)
-        }))
+        })
       } else {
         None
       }
@@ -95,12 +95,17 @@ object Stash {
     override def reads(json: JsValue): JsResult[Stash] = {
       (json \ "location").validate[Location] match {
         case JsSuccess(location, _) =>
-          (json \ "name").validate[String] match {
-            case JsSuccess(nameValue, _) =>
-              val id = UUID.randomUUID().toString
-              JsSuccess(new Stash(id, nameValue, location))
+          (json \ "userID").validate[String] match {
+            case JsSuccess(userIDValue, _) =>
+              (json \ "name").validate[String] match {
+                case JsSuccess(nameValue, _) =>
+                  val id = UUID.randomUUID().toString
+                  JsSuccess(new Stash(id, userIDValue, nameValue, location))
+                case _ => JsError("")
+              }
             case _ => JsError("")
           }
+
         case _ => JsError("")
       }
     }

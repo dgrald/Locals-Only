@@ -11,7 +11,8 @@ var app = angular.module('uiApp', [
   'mgcrea.ngStrap',
   'satellizer',
   'ui-leaflet',
-  'ngLodash'
+  'ngLodash',
+  'ui.bootstrap'
 ]);
 
 /**
@@ -50,7 +51,7 @@ app.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $authPro
     }})
     .state('signUp', { url: '/signUp', templateUrl: '/views/signUp.html' })
     .state('signIn', { url: '/signIn', templateUrl: '/views/signIn.html' })
-    .state('map', { url: '/map', templateUrl: '/views/map.html', controller: 'MapCtrl' })
+    .state('map', { url: '/map', templateUrl: '/views/map.html' })
     .state('signOut', { url: '/signOut', template: null,  controller: 'SignOutCtrl' });
 
   $httpProvider.interceptors.push(function($q, $injector) {

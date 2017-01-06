@@ -122,10 +122,11 @@ class StashStoreSpec extends PlaySpec with ScalaFutures {
   "StashStore.updateStash" should {
     "update the stash with the new fields" in {
       val stashId = SomeRandom.uuidString()
-      val originalStash = Stash(stashId, SomeRandom.string(), SomeRandom.lineLocation())
+      val originalStash = Stash(stashId, SomeRandom.uuidString(), SomeRandom.string(), SomeRandom.lineLocation())
       val updatedStashName = SomeRandom.string()
       val updatedStashLocation = SomeRandom.pointLocation()
-      val updatedStash = Stash(stashId, updatedStashName, updatedStashLocation)
+      val updatedUserId = SomeRandom.uuidString()
+      val updatedStash = Stash(stashId, updatedUserId, updatedStashName, updatedStashLocation)
 
       val savedOriginalStashFuture = stashStore.addStash(originalStash)
       whenReady(savedOriginalStashFuture) { addedStash =>
